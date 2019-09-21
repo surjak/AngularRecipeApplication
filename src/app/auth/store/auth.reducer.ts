@@ -26,6 +26,7 @@ export function authReducer(
     case AuthActions.LOGOUT:
       return { ...state, user: null };
     case AuthActions.LOGIN_START:
+    case AuthActions.SIGNUP_START:
       return { ...state, authError: null, logging: true };
     case AuthActions.LOGIN_FAIL:
       return {
@@ -34,6 +35,8 @@ export function authReducer(
         authError: action.payload,
         logging: false
       };
+    case AuthActions.CLEAR_ERROR:
+      return { ...state, authError: null };
     default:
       return state;
   }
