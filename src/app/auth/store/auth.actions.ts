@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 
 export const LOGIN = "[Auth] LOGIN";
+export const AUTO_LOGIN = "[Auth] AUTO_LOGIN";
 export const LOGOUT = "[Auth] LOGOUT";
 export const LOGIN_START = "[Auth] LOGIN_START";
 export const LOGIN_FAIL = "[Auth] LOGIN_FAIL";
@@ -38,6 +39,9 @@ export class SignupStart implements Action {
 export class ClearError implements Action {
   readonly type = CLEAR_ERROR;
 }
+export class AutoLogin implements Action {
+  readonly type = AUTO_LOGIN;
+}
 
 export type AuthActions =
   | Login
@@ -45,4 +49,5 @@ export type AuthActions =
   | LoginFail
   | LoginStart
   | SignupStart
-  | ClearError;
+  | ClearError
+  | AutoLogin;
