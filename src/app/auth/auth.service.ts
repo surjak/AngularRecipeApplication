@@ -1,3 +1,5 @@
+//Only setLogout and clearLogout is used, the rest is refactored to ngrx, I leave only setLogout
+
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, tap } from "rxjs/operators";
@@ -29,6 +31,24 @@ export class AuthService {
     private router: Router,
     private store: Store<fromApp.AppState>
   ) {}
+
+  ////////////////////////////////
+
+  setLogoutTimer(expirationDuration: number) {
+    this.tokenExpTimer = setTimeout(() => {
+      this.store.dispatch(new AuthActions.Logout());
+    }, expirationDuration);
+  }
+
+  clearLogoutTimer() {
+    if (this.tokenExpTimer) {
+      clearTimeout(this.tokenExpTimer);
+      this.tokenExpTimer = null;
+    }
+  }
+
+  //////////////////////////////
+
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
